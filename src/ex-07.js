@@ -3,6 +3,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { WEBGL } from './webgl'
 
 if (WEBGL.isWebGLAvailable()) {
+  const FogColor = 0x004fff
+  const objColor = 0xffffff
+  const FloorColor = 0x555555
+
   //장면
   const scene = new THREE.Scene()
   scene.background = new THREE.Color()
@@ -37,10 +41,10 @@ if (WEBGL.isWebGLAvailable()) {
 
   const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
   directionalLight.position.set(5, 1, 2)
-  directionalLight.castShadow = true
-  directionalLight.shadow.mapSize.width = 1024 // 수치가 높을 수록 그림자 선명해짐
-  directionalLight.shadow.mapSize.height = 1024 // 수치가 높을 수록 그림자 선명해짐
-  directionalLight.shadow.radius = 8
+  // directionalLight.castShadow = true
+  // directionalLight.shadow.mapSize.width = 1024 // 수치가 높을 수록 그림자 선명해짐
+  // directionalLight.shadow.mapSize.height = 1024 // 수치가 높을 수록 그림자 선명해짐
+  // directionalLight.shadow.radius = 8
 
   const dlHelper = new THREE.DirectionalLightHelper(
     directionalLight,
@@ -49,9 +53,6 @@ if (WEBGL.isWebGLAvailable()) {
   )
   // scene.add(dlHelper)
   scene.add(directionalLight)
-
-  const hemisphereLight = new THREE.HemisphereLight(0x0000ff, 0xff0000, 1)
-  // scene.add(hemisphereLight)
 
   const pointLight = new THREE.PointLight(0xffffff, 0.5)
   pointLight.position.set(-1, 1, 0.5)
@@ -71,13 +72,12 @@ if (WEBGL.isWebGLAvailable()) {
   // spotLight.castShadow = true
 
   // 도형 추가
-  // const geometry = new THREE.SphereGeometry(0.6, 32, 16)
-  // const geometry = new THREE.IcosahedronGeometry(0, 1, 0)
-  const geometry = new THREE.ConeGeometry(0.7, 0.7, 5)
+  const geometry = new THREE.TorusGeometry(0.7, 0.3, 12, 80)
 
-  const material = new THREE.MeshStandardMaterial({ color: 0x0000ff })
+  const material = new THREE.MeshStandardMaterial({})
   const cube = new THREE.Mesh(geometry, material)
-  cube.position.x = 0.5
+  cube.position.x = 0.4
+  cube.position.y = 0.5
   scene.add(cube)
   cube.castShadow = true
 
