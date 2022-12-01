@@ -69,7 +69,7 @@ if (WEBGL.isWebGLAvailable()) {
     camera.updateProjectionMatrix()
     renderer.setSize(window.innerWidth, window.innerHeight)
   }
-  window.addEventListener()
+  window.addEventListener('resize', onWindowResize)
 } else {
   var warning = WEBGL.getWebGLErrorMessage()
   document.body.appendChild(warning)
